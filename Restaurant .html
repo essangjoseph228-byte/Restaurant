@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <title>Hello, World!</title>
+</head>
+<body>
+  <h1>
+    
+
+🗂️ FILE STRUCTURE
+
+restaurant-website/
+│
+├── index.html          ← Home Page
+├── book.html           ← Book a Table Page
+├── menu.html           ← Menu View & Edit Page
+├── order.html          ← Order Food Page
+├── style.css           ← Common CSS file
+└── script.js           ← JS for menu editing (localStorage)
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Home | TastyBite Restaurant</title>
+  <link rel="stylesheet" href
+
+<audio controls>
+  <source src="music.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+
+<audio controls autoplay loop>
+  <source src="background.mp3" type="audio/mpeg">
+  Your browser does not support the audio tag.
+</audio>
+
+<audio controls>
+  <source src="https://www.example.com/audio/song.mp3" type="audio/mpeg">
+</audio>
+
+</head>
+<body>
+  <header>
+    <h1>TastyBite Restaurant</h1>
+    <nav>
+      <a href="Restaurant.html">Home</a>
+      <a href="book.html">Book Table</a>
+      <a href="menu.html">Menu</a>
+      <a href="order.html">Order</a>
+    </nav>
+  </header>
+  <main>
+    <h2>Welcome to TastyBite</h2>
+    <p>We serve delicious meals made with love. Our chefs prepare both local and international dishes with fresh ingredients.</p>
+    <img src="https://via.placeholder.com/600x300" alt="Restaurant image" />
+  </main>
+</body>
+</html>
+
+
+---
+
+✅ 2. book.html (Table Booking Page)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Book a Table | TastyBite</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Book a Table</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="book.html">Book Table</a>
+      <a href="menu.html">Menu</a>
+      <a href="order.html">Order</a>
+    </nav>
+  </header>
+  <main>
+    <form>
+      <label>Name: <input type="text" required /></label><br/>
+      <label>Email: <input type="email" required /></label><br/>
+      <label>Guests: <input type="number" min="1" max="20" required /></label><br/>
+      <label>Date & Time: <input type="datetime-local" required /></label><br/>
+      <button type="submit">Book Now</button>
+    </form>
+  </main>
+</body>
+</html>
+
+
+---
+
+✅ 3. menu.html (View + Edit Menu)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Menu | TastyBite</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Our Menu</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="book.html">Book Table</a>
+      <a href="menu.html">Menu</a>
+      <a href="order.html">Order</a>
+    </nav>
+  </header>
+  <main>
+    <h2>Menu Items</h2>
+    <ul id="menuList"></ul>
+
+    <h3>Edit Menu (Owner)</h3>
+    <form id="menuForm">
+      <label>Item: <input type="text" id="menuItem" required /></label>
+      <label>Price: <input type="text" id="menuPrice" required /></label>
+      <button type="submit">Add to Menu</button>
+    </form>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+---
+
+✅ 4. order.html (Order Food Page)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Order Food | TastyBite</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Order Food</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="book.html">Book Table</a>
+      <a href="menu.html">Menu</a>
+      <a href="order.html">Order</a>
+    </nav>
+  </header>
+  <main>
+    <form>
+      <label>Name: <input type="text" required /></label><br/>
+      <label>Phone: <input type="tel" required /></label><br/>
+      <label>Food Item: <input type="text" required /></label><br/>
+      <label>Quantity: <input type="number" min="1" required /></label><br/>
+      <button type="submit">Place Order</button>
+    </form>
+  </main>
+</body>
+</html>
+
+
+---
+
+✅ style.css (Basic Styling)
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #fff8f0;
+}
+
+header {
+  background: #d35400;
+  color: white;
+  padding: 1em;
+}
+
+nav a {
+  margin: 0 1em;
+  color: white;
+  text-decoration: none;
+}
+
+main {
+  padding: 2em;
+}
+
+form {
+  background: #ffe6cc;
+  padding: 1em;
+  max-width: 400px;
+  border-radius: 5px;
+}
+
+form input, form button {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  padding: 8px;
+}
+
+
+---
+
+✅ script.js (JS for Menu Editing with localStorage)
+
+// Menu item saving logic
+document.addEventListener("DOMContentLoaded", () => {
+  const menuList = document.getElementById("menuList");
+  const form = document.getElementById("menuForm");
+
+  // Load saved menu items
+  const menuItems = JSON.parse(localStorage.getItem("menu")) || [];
+  menuItems.forEach(item => {
+    addItemToList(item.name, item.price);
+  });
+
+  if (form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const name = document.getElementById("menuItem").value;
+      const price = document.getElementById("menuPrice").value;
+
+      const newItem = { name, price };
+      menuItems.push(newItem);
+      localStorage.setItem("menu", JSON.stringify(menuItems));
+
+      addItemToList(name, price);
+      form.reset();
+    });
+  }
+
+  function addItemToList(name, price) {
+    const li = document.createElement("li");
+    li.textContent = `${name} - ₦${price}`;
+    menuList.appendChild(li);
+  }
+});
+
+
+---
+
+✅ How to Use:
+
+1. Save each file into a folder (e.g., restaurant-website).
+
+
+2. Open index.html in your browser.
+
+
+3. Menu items are stored in browser localStorage (simulate owner-only edit).
+
+
+
+
+---
+
+If you'd like:
+
+A hosted version online.
+
+A version with backend/database.
+
+A downloadable ZIP file.
+
+
+Let me know — I’ll generate that for you.
+
+
+  </h1>
+</body>
+</html>
